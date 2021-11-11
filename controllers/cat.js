@@ -18,10 +18,30 @@ exports.cat_list = async function(req, res) {
 exports.cat_detail = function(req, res) {
  res.send('NOT IMPLEMENTED: Cat detail: ' + req.params.id);
 };
+// // Handle Cat create on POST.
+// exports.cat_create_post = function(req, res) {
+//  res.send('NOT IMPLEMENTED: Cat create POST');
+// };
 // Handle Cat create on POST.
-exports.cat_create_post = function(req, res) {
- res.send('NOT IMPLEMENTED: Cat create POST');
-};
+exports.cat_create_post = async function(req, res) {
+    console.log(req.body)
+    let document = new cat();
+    // We are looking for a body, since POST does not have query parameters.
+    // Even though bodies can be in many different formats, we will be picky
+    // and require that it be a json object
+    document.cat_type = req.body.cat_type;
+    document.cost = req.body.cost;
+    document.size = req.body.size;
+    try{
+    let result = await document.save();
+    res.send(result);
+    console.log(result);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+   };
 // Handle Cat delete form on DELETE.
 exports.cat_delete = function(req, res) {
  res.send('NOT IMPLEMENTED: Cat delete DELETE ' + req.params.id);
