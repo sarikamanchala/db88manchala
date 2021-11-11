@@ -1,8 +1,19 @@
 var cat = require('../models/cat');
-// List of all Cats
-exports.cat_list = function(req, res) {
- res.send('NOT IMPLEMENTED: cat list');
-};
+// // List of all Cats
+// exports.cat_list = function(req, res) {
+//  res.send('NOT IMPLEMENTED: cat list');
+// };
+// List of all Costumes
+exports.cat_list = async function(req, res) {
+    try{
+    theCat = await cat.find();
+    res.send(theCat);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+   };
 // for a specific Cats.
 exports.cat_detail = function(req, res) {
  res.send('NOT IMPLEMENTED: Cat detail: ' + req.params.id);
