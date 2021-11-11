@@ -4,9 +4,8 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
-
-const connectionString = process.env.MONGO_CON;
 mongoose = require("mongoose");
+const connectionString = 'mongodb+srv://manchalaUser:lash5388@cluster0.tkcue.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 mongoose.connect(connectionString, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -26,27 +25,27 @@ async function recreateDB() {
   await cat.deleteMany();
 
   let instance1 = new cat({
-    Brand: "Usha",
-    price: 10,
-    color: "Green",
+    cat_type: "pot",
+    size: "small",
+    cost: 10,
   });
   instance1.save(function (err, doc) {
     if (err) return console.error(err);
     console.log("First object saved");
   });
   let instance2 = new cat({
-    Brand: "tas",
-    price: 20,
-    color: "red",
+    cat_type: "pot",
+    size: "small",
+    cost: 10,
   });
   instance2.save(function (err, doc) {
     if (err) return console.error(err);
     console.log("second object saved");
   });
   let instance3 = new cat({
-    Brand: "pot",
-    price: 30,
-    color: "white",
+    cat_type: "pot",
+    size: "small",
+    cost: 10,
   });
   instance3.save(function (err, doc) {
     if (err) return console.error(err);
