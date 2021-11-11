@@ -3,7 +3,7 @@ var cat = require('../models/cat');
 // exports.cat_list = function(req, res) {
 //  res.send('NOT IMPLEMENTED: cat list');
 // };
-// List of all Costumes
+// List of all cats
 exports.cat_list = async function(req, res) {
     try{
     theCat = await cat.find();
@@ -30,3 +30,16 @@ exports.cat_delete = function(req, res) {
 exports.cat_update_put = function(req, res) {
  res.send('NOT IMPLEMENTED: Cat update PUT' + req.params.id);
 };
+// VIEWS
+// Handle a show all view
+exports.cat_view_all_Page = async function(req, res) {
+    try{
+    theCat = await cat.find();
+    res.render('cats', { title: 'Cat Search Results', results: theCat });
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+   };
+   
