@@ -7,6 +7,7 @@ var cat_controller = require('../controllers/cat');
 // GET resources base.
 router.get('/', api_controller.api);
 router.get('/', cat_controller.cat_view_all_Page );
+ 
 //cat ROUTES ///
 // POST request for creating a Cat.
 router.post('/cat', cat_controller.cat_create_post);
