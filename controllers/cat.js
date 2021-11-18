@@ -93,3 +93,74 @@ exports.cat_view_all_Page = async function(req, res) {
     }
    };
    
+
+   // Handle cat delete on DELETE. 
+exports.cat_delete = async function(req, res) { 
+    console.log("delete "  + req.params.id) 
+    try { 
+        result = await cat.findByIdAndDelete( req.params.id) 
+        console.log("Removed " + result) 
+        res.send(result) 
+    } catch (err) { 
+        res.status(500) 
+        res.send(`{"error": Error deleting ${err}}`); 
+    } 
+}; 
+// Handle a show one view with id specified by query 
+exports.cat_view_one_Page = async function(req, res) { 
+    console.log("single view for id "  + req.query.id) 
+    try{ 
+        result = await cat.findById( req.query.id) 
+        res.render('catdetail',  
+{ title: 'cat Detail', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
+ 
+ // Handle building the view for creating a cat. 
+// No body, no in path parameter, no query. 
+// Does not need to be async 
+exports.cat_create_Page =  function(req, res) { 
+    console.log("create view") 
+    try{ 
+        res.render('catcreate', { title: 'Cat Create'}); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
+// Handle building the view for updating a cat. 
+// query provides the id 
+exports.cat_update_Page =  async function(req, res) { 
+    console.log("update view for item "+req.query.id) 
+    try{ 
+        let result = await cat.findById(req.query.id) 
+        res.render('catupdate', { title: 'cat Update', toShow: result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+
+// Handle a delete one view with id from query 
+exports.cat_delete_Page = async function(req, res) { 
+    console.log("Delete view for id "  + req.query.id) 
+    try{ 
+        result = await cat.findById(req.query.id) 
+        res.render('catdelete', { title: 'cat Delete', toShow: 
+result }); 
+    } 
+    catch(err){ 
+        res.status(500) 
+        res.send(`{'error': '${err}'}`); 
+    } 
+}; 
+ 
+ 

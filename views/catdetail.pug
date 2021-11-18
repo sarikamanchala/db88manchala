@@ -1,0 +1,19 @@
+extends layout
+block content
+ h1= title
+ if (toShow == null)
+  h2 No instance to show cat details
+ else 
+  - let catid = toShow._id
+  - let cat_type = toShow.cat_type
+  - let catcost = toShow.cost
+  - let catsize = toShow.size
+ div
+  div.row
+   div(class='catAttr mr-3') Cat ID is: #{catid}
+  div.row
+   div(class='cat mr-3') Cat Type is: #{cat_type}
+  div.row
+   div(class='catAttr mr-3') Cat Size is: #{catsize}
+  div.row
+   div(class='cat mr-3') Cat Cost is: #{catcost}
