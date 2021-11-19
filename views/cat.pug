@@ -1,37 +1,22 @@
 extends layout
 
 block content
+
   h1= title
-  p
-  - let cat=results
-  p Sarika Manchala
-  div(class="container-fluid")
-        div(class="row")
-            -
-                let cat = [
-                    {
-                        "Brand": "LongFur",
-                        "price": 100,
-                        "color": "White"
-                    },
-                    {
-                        "Brand": "RussianBlue",
-                        "price": 200,
-                        "color": "Brown"
-                    },
-                    {
-                        "Brand": "siamese",
-                        "price": 400,
-                        "color": "Black"
-                    },                   
-                ]
-            each v,index in cat 
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.Brand}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.price}
-                div(class="col-sm-2" onclick=`buy(${index})`) #{v.color}
-                
-  script.                
-        function buy(intemNo)
-        {
-              alert(`you purchased Item ${intemNo+1}`)
-        }                
+  - let array=[{"cat_type":"Hyderabad","size":"large","cost":100},{"cat_type":"Bengali","size":"medium","cost":150},{"cat_type":"Chennai","size":"small","cost":200}]
+  - let items = results
+   div(class="container-fluid")
+    div(class="row m-1")
+     each item in array
+      - let destination = `dispatch(\"/cat/update?id=${item._id}\")`
+      div(class="col-sm-4",class="m-l") Type: #{item.cat_type}
+      div(class="col-sm-4",class="m-l") Siz: #{item.size}
+      div(class="col-sm-4",class="m-l") Cost: #{item.cost}
+        button.btn( class="btn-primary ml-1", onclick= destination) Update
+
+
+
+   script.
+     function dispatch(path){
+       window.location.href=path
+     }
