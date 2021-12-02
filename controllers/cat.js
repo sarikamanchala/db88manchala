@@ -85,7 +85,7 @@ failed`);
 exports.cat_view_all_Page = async function(req, res) {
     try{
     theCat = await cat.find();
-    res.render('cats', { title: 'Cat Search Results', results: theCat });
+    res.render('cat', { title: 'Cat Search Results', results: theCat });
     }
     catch(err){
     res.status(500);

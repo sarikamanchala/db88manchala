@@ -1,22 +1,46 @@
+//- extends layout
+
+//- block content
+
+//-   h1= title
+//-   - let array=[{"cat_type":"Hyderabad","size":"large","cost":100},{"cat_type":"Bengali","size":"medium","cost":150},{"cat_type":"Chennai","size":"small","cost":200}]
+//-   - let items = results
+//-    div(class="container-fluid")
+//-     div(class="row m-1")
+//-      each item in array
+//-       - let destination = `dispatch(\"/cat/update?id=${item._id}\")`
+//-       div(class="col-sm-4",class="m-l") Type: #{item.cat_type}
+//-       div(class="col-sm-4",class="m-l") Siz: #{item.size}
+//-       div(class="col-sm-4",class="m-l") Cost: #{item.cost}
+//-         button.btn( class="btn-primary ml-1", onclick= destination) Update
+
+
+
+//-    script.
+//-      function dispatch(path){
+//-        window.location.href=path
+//-      }
 extends layout
 
 block content
-
+  - let create = `dispatch(\"cat/create\")`
+  button.btn(class="btn-primary m1-1", onclick=create) Create
   h1= title
-  - let array=[{"cat_type":"Hyderabad","size":"large","cost":100},{"cat_type":"Bengali","size":"medium","cost":150},{"cat_type":"Chennai","size":"small","cost":200}]
-  - let items = results
-   div(class="container-fluid")
-    div(class="row m-1")
-     each item in array
-      - let destination = `dispatch(\"/cat/update?id=${item._id}\")`
-      div(class="col-sm-4",class="m-l") Type: #{item.cat_type}
-      div(class="col-sm-4",class="m-l") Siz: #{item.size}
-      div(class="col-sm-4",class="m-l") Cost: #{item.cost}
-        button.btn( class="btn-primary ml-1", onclick= destination) Update
-
-
-
+  - let cat=results;
+  div(class="container-fluid mt-3")
+   div(class="row m-1")
+    each element in cat
+     - let destination=`buy(\"/cat/update?id=${element._id}\")`
+     - let detail=`buy(\"/cat/detail?id=${element._id}\")`
+     - let del=`buy(\"/cat/delete?id=${element._id}\")`
+     div(class="col-sm-6 bg-secondary m-1 p-3") Cat #{element.cat_type} - #{element.size} - #{element.cost}
+      button.btn( class="btn-info ml-2", onclick=destination ) Update
+      button.btn( class="btn-dark ml-2", onclick=detail ) Get Detail
+      button.btn( class="btn-warning ml-2", onclick=del ) Delete
+  
    script.
-     function dispatch(path){
-       window.location.href=path
-     }
+    function buy(path){
+        window.location.href=path
+
+        //alert(`You purchased Item ${a+1}`)
+      }
